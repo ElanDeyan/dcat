@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:args/args.dart';
 
+/// Shows [ArgParser] usage in standard output.
 void printUsage(ArgParser argParser) {
-  print('Usage: dart dcat.dart <flags> [arguments]');
-  print(argParser.usage);
+  stdout
+    ..writeln('Usage: dart dcat.dart <flags> [arguments]')
+    ..writeln(argParser.usage);
 }
