@@ -23,10 +23,12 @@ Future<void> displayFilesContent(
   }
 
   if (values.isNotEmpty) {
-    await _onData(
-      values,
-      displayLinesNumber: displayLinesNumber,
-      skipBlankLines: skipBlankLines,
+    await Isolate.run(
+      () => _onData(
+        values,
+        displayLinesNumber: displayLinesNumber,
+        skipBlankLines: skipBlankLines,
+      ),
     );
   } else {
     stdout.writeln('No content provided!');
