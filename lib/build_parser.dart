@@ -1,37 +1,40 @@
 import 'package:args/args.dart';
+import 'package:dcat/constants/parser/display_lines_number_flag.dart';
+import 'package:dcat/constants/parser/files_multi_option.dart';
+import 'package:dcat/constants/parser/help_flag.dart';
+import 'package:dcat/constants/parser/skip_blank_lines_flag.dart';
+import 'package:dcat/constants/parser/version_flag.dart';
 
 /// Builds an instance of [ArgParser] already configured
 ArgParser buildParser() {
   return ArgParser()
     ..addMultiOption(
-      'files',
-      abbr: 'f',
+      filesOptionLongName,
+      abbr: filesOptionAbbr,
       defaultsTo: const [''],
-      help: '''
-Files to be processed.
-Can be a dash or an empty string to read standard input.
-''',
-      valueHelp: "file.txt|-|''",
+      help: filesHelpMessage,
+      valueHelp: filesValueHelp,
     )
     ..addFlag(
-      'display-lines-number',
-      abbr: 'n',
-      help: 'Whether displays the line number at left.',
+      displayLinesNumberLongName,
+      abbr: displayLinesNumberAbbr,
+      help: displayLinesNumberHelpMessage,
     )
     ..addFlag(
-      'skip-blank-lines',
-      abbr: 'b',
-      help: 'Whether ignores blank lines.',
+      skipBlankLinesLongName,
+      abbr: skipBlankLinesAbbr,
+      help: skipBlankLinesHelpMessage,
     )
     ..addFlag(
-      'help',
-      abbr: 'h',
+      helpLongName,
+      abbr: helpAbbr,
       negatable: false,
-      help: 'Print this usage information.',
+      help: helpHelpMessage,
     )
     ..addFlag(
-      'version',
+      versionLongName,
+      abbr: versionAbbr,
       negatable: false,
-      help: 'Print the tool version.',
+      help: versionHelpMessage,
     );
 }
