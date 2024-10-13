@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dcat/core/exceptions/invalid_argument_exception.dart';
 import 'package:dcat/core/exceptions/missing_file_exception.dart';
 import 'package:dcat/core/types/argument_value.dart';
@@ -12,7 +13,7 @@ List<DcatArgumentValue> argumentValuesOnValid(List<String> arguments) {
       try {
         switch (argument) {
           case '' || '-':
-            argumentValues.add(StandardInputArgument(argument));
+            argumentValues.add(const StandardInputArgument());
           default:
             argumentValues.add(RegularFileArgument(File(argument)));
         }
