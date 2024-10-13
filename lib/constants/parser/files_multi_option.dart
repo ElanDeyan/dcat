@@ -6,9 +6,9 @@ const filesOptionAbbr = 'f';
 
 /// Help message for the files multi option.
 const filesHelpMessage = '''
-Files to be processed.
-Can be a dash or an empty string to read standard input.
+A comma separated list of file paths to be read.
+Add a dash or an empty string to read standard input.
 ''';
 
 /// Value help for the files multi option.
-const filesValueHelp = "file.txt|-|''";
+const filesValueHelp = "file.txt|file.txt,file2.json|-|''";
