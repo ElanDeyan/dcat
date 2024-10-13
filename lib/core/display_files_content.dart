@@ -7,14 +7,21 @@ import 'package:dcat/core/types/argument_value.dart';
 import 'package:dcat/core/validations/argument_values_on_valid.dart';
 import 'package:quiver/strings.dart';
 
+/// Main function that displays the content of each file in [filePaths] and, if
+/// provided, the [stdin] content.
+///
+/// Can display the line number as prefix of each line through the
+/// [displayLinesNumber] flag.
+///
+/// Also can skip blank lines through the [skipBlankLines] flag.
 Future<void> displayFilesContent(
-  List<String> arguments, {
+  List<String> filePaths, {
   bool displayLinesNumber = false,
   bool skipBlankLines = false,
 }) async {
   late final List<DcatArgumentValue> values;
   try {
-    values = await Isolate.run(() => argumentValuesOnValid(arguments));
+    values = await Isolate.run(() => argumentValuesOnValid(filePaths));
   } on InvalidArgumentException catch (e) {
     stdout
       ..writeln('oops!')
@@ -58,7 +65,7 @@ Future<void> _onData(
 
     for (var i = 1; i <= lines.length; i++) {
       if (displayLinesNumber) {
-        stdout.writeln(_lineWithNumberPreffix(lines[i - 1], i, lines.length));
+        stdout.writeln(_lineWithNumberPrefix(lines[i - 1], i, lines.length));
       } else {
         stdout.writeln(lines[i - 1]);
       }
@@ -67,7 +74,7 @@ Future<void> _onData(
   }
 }
 
-String _lineWithNumberPreffix(
+String _lineWithNumberPrefix(
   String line,
   int lineNumber,
   int lastLineNumber,
