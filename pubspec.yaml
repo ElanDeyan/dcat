@@ -1,6 +1,6 @@
 name: dcat
 description: A dart version of the Unix cat command.
-version: 0.0.1
+version: 1.0.0
 repository: https://github.com/ElanDeyan/dcat
 issue_tracker: https://github.com/ElanDeyan/dcat/issues
 executables: 
