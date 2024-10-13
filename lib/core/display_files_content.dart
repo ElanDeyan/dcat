@@ -22,10 +22,7 @@ Future<void> displayFilesContent(
   late final List<DcatArgumentValue> values;
   try {
     values = await Isolate.run(() => argumentValuesOnValid(filePaths));
-  } on InvalidArgumentException catch (e) {
-    stdout
-      ..writeln('oops!')
-      ..writeln(e.message);
+  } on InvalidArgumentException {
     return;
   }
 
