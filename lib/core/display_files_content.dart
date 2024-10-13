@@ -42,21 +42,45 @@ Future<void> _onData(
 }) async {
   for (final argument in values) {
     stdout.writeln();
+
     late final List<String> lines;
+    const lineSplitter = LineSplitter();
     switch (argument) {
       case RegularFileArgument(:final file):
         stdout.writeln('${'-' * 5} ${file.path} ${'-' * 5}');
-        lines = await file.readAsLines();
+        lines = lineSplitter.convert(await file.readAsString());
       case StandardInputArgument():
         stdout.writeln('${'-' * 5} Standard input ${'-' * 5}');
-        lines = const LineSplitter().convert(stdin.readLineSync() ?? '');
+        lines = lineSplitter.convert(stdin.readLineSync() ?? '');
     }
 
     if (skipBlankLines) lines.removeWhere(isBlank);
 
     for (var i = 1; i <= lines.length; i++) {
-      stdout.writeln('${displayLinesNumber ? '$i ' : ''}${lines[i - 1]}');
+      if (displayLinesNumber) {
+        stdout.writeln(_lineWithNumberPreffix(lines[i - 1], i, lines.length));
+      } else {
+        stdout.writeln(lines[i - 1]);
+      }
     }
     stdout.writeln();
   }
+}
+
+String _lineWithNumberPreffix(
+  String line,
+  int lineNumber,
+  int lastLineNumber,
+) {
+  final blankSpacesToAdd =
+      lastLineNumber.toString().length - lineNumber.toString().length + 1;
+
+  final buffer = StringBuffer()
+    ..writeAll([
+      lineNumber,
+      ' ' * blankSpacesToAdd,
+      line,
+    ]);
+
+  return buffer.toString();
 }
