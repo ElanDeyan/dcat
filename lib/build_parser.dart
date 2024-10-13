@@ -9,17 +9,19 @@ ArgParser buildParser() {
       defaultsTo: const [''],
       help: '''
 Files to be processed.
-Can be a dash or an empty string to read standard output.
+Can be a dash or an empty string to read standard input.
 ''',
       valueHelp: "file.txt|-|''",
     )
     ..addFlag(
       'display-lines-number',
       abbr: 'n',
+      help: 'Whether displays the line number at left.',
     )
     ..addFlag(
       'skip-blank-lines',
       abbr: 'b',
+      help: 'Whether ignores blank lines.',
     )
     ..addFlag(
       'help',
